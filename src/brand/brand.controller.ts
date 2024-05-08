@@ -13,8 +13,8 @@ import { BrandService } from './brand.service';
 import { Brand } from './entities/brand.entity';
 import { CreateBrandDto } from './dto/create-brand.dto';
 import { UpdateBrandDto } from './dto/update-brand.dto';
-import { ApiOkResponse, ApiQuery, ApiTags } from '@nestjs/swagger';
 import { ResponseBrandDto } from './dto/response-brand.dto';
+import { ApiOkResponse, ApiQuery, ApiTags } from '@nestjs/swagger';
 
 @ApiTags('Brands')
 @Controller('brands')
