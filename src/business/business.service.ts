@@ -17,14 +17,14 @@ export class BusinessService {
   }
 
   async findAll(): Promise<Business[]> {
-    return this.businessRepository.find();
+    return this.businessRepository.find({ relations: ['brands'] });
   }
 
   async findOne(id: number): Promise<Business | null> {
     return this.businessRepository.findOneBy({ id });
   }
 
-  async update(id: number, data: UpdateBusinessDto) {
+  async update(id: number, data: UpdateBusinessDto): Promise<Business> {
     await this.businessRepository.update(id, data);
     return this.findOne(id);
   }

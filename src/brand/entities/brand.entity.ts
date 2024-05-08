@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Business } from 'src/business/entities/business.entity';
+import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
 export class Brand {
@@ -7,4 +8,10 @@ export class Brand {
 
   @Column()
   name: string;
+
+  @ManyToOne(() => Business, (business) => business.brands, {
+    onDelete: 'CASCADE',
+    nullable: false,
+  })
+  business: Business;
 }

@@ -9,6 +9,7 @@ import {
 } from '@nestjs/common';
 
 import { BrandService } from './brand.service';
+import { Brand } from './entities/brand.entity';
 import { CreateBrandDto } from './dto/create-brand.dto';
 import { UpdateBrandDto } from './dto/update-brand.dto';
 
@@ -17,27 +18,30 @@ export class BrandController {
   constructor(private readonly brandService: BrandService) {}
 
   @Post()
-  create(@Body() createBrandDto: CreateBrandDto) {
+  create(@Body() createBrandDto: CreateBrandDto): Promise<Brand> {
     return this.brandService.create(createBrandDto);
   }
 
   @Get()
-  findAll() {
+  findAll(): Promise<Brand[]> {
     return this.brandService.findAll();
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
+  findOne(@Param('id') id: string): Promise<Brand> {
     return this.brandService.findOne(+id);
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateBrandDto: UpdateBrandDto) {
+  update(
+    @Param('id') id: string,
+    @Body() updateBrandDto: UpdateBrandDto,
+  ): Promise<Brand> {
     return this.brandService.update(+id, updateBrandDto);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
+  remove(@Param('id') id: string): Promise<void> {
     return this.brandService.remove(+id);
   }
 }
