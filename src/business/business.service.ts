@@ -21,7 +21,11 @@ export class BusinessService {
   }
 
   async findOne(id: number): Promise<Business | null> {
-    return this.businessRepository.findOneBy({ id });
+    const data = await this.businessRepository.find({
+      where: { id },
+      relations: ['brands'],
+    });
+    return data[0];
   }
 
   async update(id: number, data: UpdateBusinessDto): Promise<Business> {

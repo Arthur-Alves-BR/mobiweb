@@ -10,9 +10,12 @@ import {
 
 import { BusinessService } from './business.service';
 import { Business } from './entities/business.entity';
+import { ApiOkResponse, ApiTags } from '@nestjs/swagger';
 import { CreateBusinessDto } from './dto/create-business.dto';
 import { UpdateBusinessDto } from './dto/update-business.dto';
+import { ResponseBusinessDto } from './dto/response-business.dto';
 
+@ApiTags('Business')
 @Controller('business')
 export class BusinessController {
   constructor(private readonly businessService: BusinessService) {}
@@ -23,11 +26,17 @@ export class BusinessController {
   }
 
   @Get()
+  @ApiOkResponse({
+    type: [ResponseBusinessDto],
+  })
   findAll(): Promise<Business[]> {
     return this.businessService.findAll();
   }
 
   @Get(':id')
+  @ApiOkResponse({
+    type: ResponseBusinessDto,
+  })
   findOne(@Param('id') id: string): Promise<Business> {
     return this.businessService.findOne(+id);
   }

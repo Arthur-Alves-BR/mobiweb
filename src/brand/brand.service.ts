@@ -32,7 +32,6 @@ export class BrandService {
   }
 
   async findByBusiness(businessId: number): Promise<Brand[]> {
-    console.log(businessId);
     return this.brandRepository.find({
       where: {
         business: {
