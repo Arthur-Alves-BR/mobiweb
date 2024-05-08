@@ -31,6 +31,17 @@ export class BrandService {
     return this.brandRepository.findOneBy({ id });
   }
 
+  async findByBusiness(businessId: number): Promise<Brand[]> {
+    console.log(businessId);
+    return this.brandRepository.find({
+      where: {
+        business: {
+          id: businessId,
+        },
+      },
+    });
+  }
+
   async update(id: number, data: UpdateBrandDto): Promise<Brand> {
     await this.brandRepository.update(id, data);
     return this.findOne(id);

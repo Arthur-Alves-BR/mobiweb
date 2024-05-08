@@ -6,6 +6,7 @@ import {
   Param,
   Delete,
   Controller,
+  Query,
 } from '@nestjs/common';
 
 import { BrandService } from './brand.service';
@@ -23,8 +24,8 @@ export class BrandController {
   }
 
   @Get()
-  findAll(): Promise<Brand[]> {
-    return this.brandService.findAll();
+  findByBusiness(@Query('business') businessId: number): Promise<Brand[]> {
+    return this.brandService.findByBusiness(businessId);
   }
 
   @Get(':id')
