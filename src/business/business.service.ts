@@ -2,8 +2,8 @@ import { Repository } from 'typeorm';
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Business } from './entities/business.entity';
-import { CreateBusinessDto } from './dto/create-business.dto';
-import { UpdateBusinessDto } from './dto/update-business.dto';
+import { CreateBusinessDTO } from './dto/create-business.dto';
+import { UpdateBusinessDTO } from './dto/update-business.dto';
 
 @Injectable()
 export class BusinessService {
@@ -12,7 +12,7 @@ export class BusinessService {
     private businessRepository: Repository<Business>,
   ) {}
 
-  async create(data: CreateBusinessDto): Promise<Business> {
+  async create(data: CreateBusinessDTO): Promise<Business> {
     return this.businessRepository.save(data);
   }
 
@@ -28,7 +28,7 @@ export class BusinessService {
     return data[0];
   }
 
-  async update(id: number, data: UpdateBusinessDto): Promise<Business> {
+  async update(id: number, data: UpdateBusinessDTO): Promise<Business> {
     await this.businessRepository.update(id, data);
     return this.findOne(id);
   }

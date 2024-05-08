@@ -1,9 +1,9 @@
 import { IsNotEmpty } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
 import { PartialType } from '@nestjs/mapped-types';
-import { CreateBusinessDto } from './create-business.dto';
+import { CreateBusinessDTO } from './create-business.dto';
 
-export class UpdateBusinessDto extends PartialType(CreateBusinessDto) {
+export class UpdateBusinessDTO extends PartialType(CreateBusinessDTO) {
   @ApiProperty()
   @IsNotEmpty()
   name: string;

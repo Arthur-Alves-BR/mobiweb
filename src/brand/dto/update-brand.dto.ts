@@ -1,8 +1,8 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { PartialType } from '@nestjs/mapped-types';
-import { CreateBrandDto } from './create-brand.dto';
+import { CreateBrandDTO } from './create-brand.dto';
 
-export class UpdateBrandDto extends PartialType(CreateBrandDto) {
+export class UpdateBrandDTO extends PartialType(CreateBrandDTO) {
   @ApiProperty()
   name?: string;
 

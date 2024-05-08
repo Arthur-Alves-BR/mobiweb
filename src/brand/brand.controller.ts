@@ -11,9 +11,9 @@ import {
 
 import { BrandService } from './brand.service';
 import { Brand } from './entities/brand.entity';
-import { CreateBrandDto } from './dto/create-brand.dto';
-import { UpdateBrandDto } from './dto/update-brand.dto';
-import { ResponseBrandDto } from './dto/response-brand.dto';
+import { CreateBrandDTO } from './dto/create-brand.dto';
+import { UpdateBrandDTO } from './dto/update-brand.dto';
+import { ResponseBrandDTO } from './dto/response-brand.dto';
 import { ApiOkResponse, ApiQuery, ApiTags } from '@nestjs/swagger';
 
 @ApiTags('Brands')
@@ -22,13 +22,13 @@ export class BrandController {
   constructor(private readonly brandService: BrandService) {}
 
   @Post()
-  create(@Body() createBrandDto: CreateBrandDto): Promise<Brand> {
+  create(@Body() createBrandDto: CreateBrandDTO): Promise<Brand> {
     return this.brandService.create(createBrandDto);
   }
 
   @Get()
   @ApiOkResponse({
-    type: [ResponseBrandDto],
+    type: [ResponseBrandDTO],
   })
   @ApiQuery({ name: 'business', required: false })
   findAll(@Query('business') businessId: number): Promise<Brand[]> {
@@ -37,7 +37,7 @@ export class BrandController {
 
   @Get(':id')
   @ApiOkResponse({
-    type: ResponseBrandDto,
+    type: ResponseBrandDTO,
   })
   findOne(@Param('id') id: string): Promise<Brand> {
     return this.brandService.findOne(+id);
@@ -46,7 +46,7 @@ export class BrandController {
   @Patch(':id')
   update(
     @Param('id') id: string,
-    @Body() updateBrandDto: UpdateBrandDto,
+    @Body() updateBrandDto: UpdateBrandDTO,
   ): Promise<Brand> {
     return this.brandService.update(+id, updateBrandDto);
   }

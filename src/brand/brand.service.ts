@@ -2,8 +2,8 @@ import { Repository } from 'typeorm';
 import { Injectable } from '@nestjs/common';
 import { Brand } from './entities/brand.entity';
 import { InjectRepository } from '@nestjs/typeorm';
-import { CreateBrandDto } from './dto/create-brand.dto';
-import { UpdateBrandDto } from './dto/update-brand.dto';
+import { CreateBrandDTO } from './dto/create-brand.dto';
+import { UpdateBrandDTO } from './dto/update-brand.dto';
 import { Business } from 'src/business/entities/business.entity';
 
 @Injectable()
@@ -15,7 +15,7 @@ export class BrandService {
     private readonly businessRepository: Repository<Business>,
   ) {}
 
-  async create(data: CreateBrandDto): Promise<Brand> {
+  async create(data: CreateBrandDTO): Promise<Brand> {
     const brand = this.brandRepository.create(data);
     brand.business = await this.businessRepository.findOneBy({
       id: data.businessId,
@@ -41,7 +41,7 @@ export class BrandService {
     });
   }
 
-  async update(id: number, data: UpdateBrandDto): Promise<Brand> {
+  async update(id: number, data: UpdateBrandDTO): Promise<Brand> {
     await this.brandRepository.update(id, data);
     return this.findOne(id);
   }

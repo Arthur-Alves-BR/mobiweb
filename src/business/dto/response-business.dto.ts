@@ -1,13 +1,13 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { ResponseBrandDto } from 'src/brand/dto/response-brand.dto';
+import { ResponseBrandDTO } from 'src/brand/dto/response-brand.dto';
 
-export class ResponseBusinessDto {
+export class ResponseBusinessDTO {
   @ApiProperty()
   id: number;
 
   @ApiProperty()
   name: string;
 
-  @ApiProperty()
-  brands: ResponseBrandDto[];
+  @ApiProperty({ type: ResponseBrandDTO })
+  brands: ResponseBrandDTO[];
 }
