@@ -1,12 +1,14 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsNotEmpty } from 'class-validator';
+import { IsNotEmpty, IsPositive, IsString } from 'class-validator';
 
 export class CreateBrandDTO {
   @ApiProperty()
   @IsNotEmpty()
+  @IsString()
   name: string;
 
   @ApiProperty()
   @IsNotEmpty()
+  @IsPositive()
   businessId: number;
 }

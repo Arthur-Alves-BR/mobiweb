@@ -37,20 +37,20 @@ export class BusinessController {
   @ApiOkResponse({
     type: ResponseBusinessDTO,
   })
-  findOne(@Param('id') id: string): Promise<Business> {
+  findOne(@Param('id') id: number): Promise<Business> {
     return this.businessService.findOne(+id);
   }
 
   @Patch(':id')
   update(
-    @Param('id') id: string,
+    @Param('id') id: number,
     @Body() updateBusinessDto: UpdateBusinessDTO,
   ): Promise<Business> {
     return this.businessService.update(+id, updateBusinessDto);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string): Promise<void> {
+  remove(@Param('id') id: number): Promise<void> {
     return this.businessService.remove(+id);
   }
 }

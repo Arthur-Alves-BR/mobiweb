@@ -1,9 +1,9 @@
 import { Repository } from 'typeorm';
-import { Injectable } from '@nestjs/common';
 import { Brand } from './entities/brand.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { CreateBrandDTO } from './dto/create-brand.dto';
 import { UpdateBrandDTO } from './dto/update-brand.dto';
+import { BadRequestException, Injectable } from '@nestjs/common';
 import { Business } from './../business/entities/business.entity';
 
 @Injectable()
@@ -17,9 +17,15 @@ export class BrandService {
 
   async create(data: CreateBrandDTO): Promise<Brand> {
     const brand = this.brandRepository.create(data);
-    brand.business = await this.businessRepository.findOneBy({
+    const business = await this.businessRepository.findOneBy({
       id: data.businessId,
     });
+
+    if (!business) {
+      throw new BadRequestException('Invalid businessId');
+    }
+
+    brand.business = business;
     return this.brandRepository.save(brand);
   }
 

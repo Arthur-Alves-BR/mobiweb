@@ -22,8 +22,8 @@ export class BrandController {
   constructor(private readonly brandService: BrandService) {}
 
   @Post()
-  create(@Body() createBrandDto: CreateBrandDTO): Promise<Brand> {
-    return this.brandService.create(createBrandDto);
+  create(@Body() data: CreateBrandDTO): Promise<Brand> {
+    return this.brandService.create(data);
   }
 
   @Get()
@@ -39,20 +39,20 @@ export class BrandController {
   @ApiOkResponse({
     type: ResponseBrandDTO,
   })
-  findOne(@Param('id') id: string): Promise<Brand> {
+  findOne(@Param('id') id: number): Promise<Brand> {
     return this.brandService.findOne(+id);
   }
 
   @Patch(':id')
   update(
-    @Param('id') id: string,
-    @Body() updateBrandDto: UpdateBrandDTO,
+    @Param('id') id: number,
+    @Body() data: UpdateBrandDTO,
   ): Promise<Brand> {
-    return this.brandService.update(+id, updateBrandDto);
+    return this.brandService.update(+id, data);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string): Promise<void> {
+  remove(@Param('id') id: number): Promise<void> {
     return this.brandService.remove(+id);
   }
 }
