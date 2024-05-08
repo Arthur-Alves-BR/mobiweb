@@ -8,6 +8,6 @@ export class ResponseBusinessDTO {
   @ApiProperty()
   name: string;
 
-  @ApiProperty({ type: ResponseBrandDTO })
+  @ApiProperty({ type: () => [ResponseBrandDTO] })
   brands: ResponseBrandDTO[];
 }
