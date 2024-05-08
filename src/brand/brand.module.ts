@@ -4,7 +4,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { BrandService } from './brand.service';
 import { Brand } from './entities/brand.entity';
 import { BrandController } from './brand.controller';
-import { Business } from 'src/business/entities/business.entity';
+import { Business } from './../business/entities/business.entity';
 
 @Module({
   providers: [BrandService],

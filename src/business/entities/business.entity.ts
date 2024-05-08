@@ -1,4 +1,4 @@
-import { Brand } from 'src/brand/entities/brand.entity';
+import { Brand } from './../../brand/entities/brand.entity';
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()

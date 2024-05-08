@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { ResponseBrandDTO } from 'src/brand/dto/response-brand.dto';
+import { ResponseBrandDTO } from './../../brand/dto/response-brand.dto';
 
 export class ResponseBusinessDTO {
   @ApiProperty()
