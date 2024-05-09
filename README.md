@@ -46,12 +46,12 @@ The documentation can be accessed locally or remotely via the ```/docs``` endpoi
 
 One of the requirements of the challenge was to implement an endpoint that receives the ID of a business and returns the brands associated with it, so I will use the API available in the cloud to demonstrate two ways of obtaining the desired result:
 
-1. By default, GET /business returns the brands associated with each business, so we can use this GET with the ID of a specific business to view its brands (http://34.67.50.8/business/1).
+1. By default, GET ```/business``` returns the brands associated with each business, so we can use this GET with the ID of a specific business to view its brands (http://34.67.50.8/business/1).
 <p align="center">
   <a target="blank"><img src="./readme_images/business.png" width="500" /></a>
 </p>
 
-2. A ```business``` filter has been implemented in GET /brands to filter only the brands that belong to a particular business, so it's quite simple to list the brands of a particular business (http://34.67.50.8/brands?business=1).
+2. A ```business``` filter has been implemented in GET ```/brands``` to filter only the brands that belong to a particular business, so it's quite simple to list the brands of a particular business (http://34.67.50.8/brands?business=1).
 <p align="center">
   <a target="blank"><img src="./readme_images/brands.png" width="500" /></a>
 </p>
