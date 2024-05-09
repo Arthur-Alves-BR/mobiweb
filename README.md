@@ -1,77 +1,101 @@
 <p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
+  <a target="blank"><img src="https://mobiweb.pt/public/images/icons/logo.svg" width="300" /></a>
 </p>
-
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
-
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
 
 ## Description
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+This repository contains a dockerized NestJS API, developed as a solution to a technical challenge proposed by [Mobiweb](https://mobiweb.pt/) in May 2024 and publicly available via the url http://34.67.50.8. The API has CRUDs for two distinct entities (Business and Brand) and its development followed the standard architecture provided by [NestJS](https://nestjs.com/), using *TypeScript* to create *Controllers*, *Services*, *Repositories*, *DTOs*, etc.
 
-## Installation
-
-```bash
-$ npm install
-```
+## Pre-requisites
+- Git
+- Docker
 
 ## Running the app
 
-```bash
-# development
-$ npm run start
+Step by step to run the project locally:
 
-# watch mode
-$ npm run start:dev
+1. Clone the repository in a directory of your choice
+2. Access the folder in which the repository was cloned
+3. Create an ```.env``` file in the root of the repository containing the following variables: 
 
-# production mode
-$ npm run start:prod
 ```
+DATABASE_HOST=34.138.223.172
+DATABASE_NAME=mobiweb
+DATABASE_PORT=5432
+DATABASE_USER=postgres
+DATABASE_PASSWORD=<PASSWORD> (sent by email)
+```
+4. Run the command to build the container: ```docker compose build```
+5. Run the command to run the container: ```docker compose up```
 
-## Test
+If everything went well, the API will be available at http://localhost.
+
+## Endpoints documentation
+
+This project uses the [@nestjs/swagger](https://www.npmjs.com/package/@nestjs/swagger) module to automatically generate documentation based on the [OpenAPI](https://www.openapis.org/) specification. The generated page allows you to view existing endpoints, payload and response formats, etc. You can also use the documentation to test the endpoints with real data.
+
+<p align="center">
+  <a target="blank"><img src="./readme_images/docs.png" width="1000" /></a>
+</p>
+
+The documentation can be accessed locally or remotely via the ```/docs`` endpoint.
+- Locally: http://localhost/docs
+- Google Cloud: http://34.67.50.8/docs
+
+## Endpoint to get a business' brands
+
+One of the requirements of the challenge was to implement an endpoint that receives the ID of a business and returns the brands associated with it, so I will use the API available in the cloud to demonstrate two ways of obtaining the desired result:
+
+1. By default, GET /business returns the brands associated with each business, so we can use this GET with the ID of a specific business to view its brands (http://34.67.50.8/business/1).
+<p align="center">
+  <a target="blank"><img src="./readme_images/business.png" width="500" /></a>
+</p>
+
+2. A ```business``` filter has been implemented in GET /brands to filter only the brands that belong to a particular business, so it's quite simple to list the brands of a particular business (http://34.67.50.8/brands?business=1).
+<p align="center">
+  <a target="blank"><img src="./readme_images/brands.png" width="500" /></a>
+</p>
+
+## Migrations
+
+The integration with the SQL database and project migrations are managed by the [TypeORM] module (https://typeorm.io/).
 
 ```bash
-# unit tests
-$ npm run test
+# Generate migration based on code entities
+npm run migration:generate --name=<migration_name>
 
-# e2e tests
-$ npm run test:e2e
+# Generate empty migration
+npm run migration:create --name=<migration_name>
 
-# test coverage
-$ npm run test:cov
-```
-
-## Support
-
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
-
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-Nest is [MIT licensed](LICENSE).
-
-
-npm run migration:generate --name=<name>
+# Run migrations
 npm run migration:run
+
+# Revert last migration applied
+npm run migration:revert
+```
+
+## Tests
+
+E2E tests have been implemented for all of the application's endpoints to ensure that the implementation is robust. The tests should be run via the container's bash.
+
+```bash
+# Acess container bash
+docker exec -it <CONTAINER_ID> bash
+
+# Run e2e tests
+npm run test:e2e
+```
+
+## Deploy
+
+The API was deployed through two Google Cloud Platform (GCP) services:
+
+- Google Cloud SQL: creation of two PostgreSQL databases, one for the application (mobiweb) and the other for running e2e tests (test_mobiweb).
+<p align="center">
+  <a target="blank"><img src="./readme_images/sql.png" width="450" /></a>
+</p>
+
+- Google Cloud Compute Engine: creation of a Virtual Machine (VM) with the *Container-Optimized OS* operating system, suitable for deploying containers.
+<p align="center">
+  <a target="blank"><img src="./readme_images/vm.png" width="800" /></a>
+</p>
