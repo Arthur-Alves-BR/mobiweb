@@ -1,5 +1,5 @@
 <p align="center">
-  <a target="blank"><img src="https://mobiweb.pt/public/images/icons/logo.svg" width="300" /></a>
+  <a target="blank"><img src="https://mobiweb.pt/public/images/icons/logo.svg" width="500" /></a>
 </p>
 
 ## Description
