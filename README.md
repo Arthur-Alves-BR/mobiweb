@@ -38,7 +38,7 @@ This project uses the [@nestjs/swagger](https://www.npmjs.com/package/@nestjs/sw
   <a target="blank"><img src="./readme_images/docs.png" width="1000" /></a>
 </p>
 
-The documentation can be accessed locally or remotely via the ```/docs`` endpoint.
+The documentation can be accessed locally or remotely via the ```/docs``` endpoint.
 - Locally: http://localhost/docs
 - Google Cloud: http://34.67.50.8/docs
 
@@ -58,7 +58,7 @@ One of the requirements of the challenge was to implement an endpoint that recei
 
 ## Migrations
 
-The integration with the SQL database and project migrations are managed by the [TypeORM] module (https://typeorm.io/).
+The integration with the SQL database and project migrations are managed by the [TypeORM](https://typeorm.io/) module.
 
 ```bash
 # Generate migration based on code entities
